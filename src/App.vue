@@ -16,24 +16,11 @@
       <div
         class="column is-desktop is-mobile is-tablet is-multiverse is-centered"
       >
-        <div
-          class="column is-12-mobile is-4-desktop is-4-tablet"
+        <character
           v-for="character of characters"
           v-bind:key="character.id"
-        >
-          <div class="card">
-            <div class="card-header">
-              <img v-bind:src="character.image" v-bind:alt="character.name" />
-            </div>
-
-            <div class="card-content">
-              <h3 class="title is-size-4">{{ character.name }}</h3>
-              <button class="button is-success is-rounded is-small">
-                Show more
-              </button>
-            </div>
-          </div>
-        </div>
+          v-bind:character="character"
+        />
       </div>
     </div>
   </div>
@@ -43,12 +30,20 @@
 //libraries
 import axios from "axios";
 
+import Character from "./components/Character";
+
 export default {
   name: "App",
+  components: {
+    Character,
+  },
   data: function () {
     return {
       characters: [],
     };
+  },
+  created() {
+    this.fetch();
   },
   methods: {
     fetch() {
