@@ -1,10 +1,40 @@
 <template>
   <div id="app">
-    <h1 class="title">Check Data</h1>
-    <button v-on:click="fetch">Check</button>
+    <div class="hero is-white is-gradient is bold">
+      <div class="hero-body">
+        <h1 class="title">
+          <span class="has-text-success">R&M</span>
+          <span class="subtitle">characters</span>
+        </h1>
+        <button class="button is-success is-rounded" v-on:click="fetch">
+          Check
+        </button>
+      </div>
+    </div>
 
-    <div v-for="character of characters" v-bind:key="character.id">
-      {{ character }}
+    <div class="container">
+      <div
+        class="column is-desktop is-mobile is-tablet is-multiverse is-centered"
+      >
+        <div
+          class="column is-12-mobile is-4-desktop is-4-tablet"
+          v-for="character of characters"
+          v-bind:key="character.id"
+        >
+          <div class="card">
+            <div class="card-header">
+              <img v-bind:src="character.image" v-bind:alt="character.name" />
+            </div>
+
+            <div class="card-content">
+              <h3 class="title is-size-4">{{ character.name }}</h3>
+              <button class="button is-success is-rounded is-small">
+                Show more
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
