@@ -3,12 +3,28 @@
     <div class="hero is-white is-gradient is bold">
       <div class="hero-body">
         <h1 class="title">
-          <span class="has-text-success">R&M</span>
-          <span class="subtitle">characters</span>
+          <span class="has-text-success">Rick and Morty</span>
+          <span class="subtitle"> characters</span>
         </h1>
-        <button class="button is-success is-rounded" v-on:click="fetch">
-          Check
-        </button>
+
+        <div class="field has-addons is-pulled-rigth">
+          <div class="control">
+            <input
+              v-model="search"
+              type="text"
+              class="input is-rounded"
+              v-on:keyup.enter="searchData"
+            />
+          </div>
+          <div class="control">
+            <button
+              class="button is-success is-rounded"
+              v-on:click="searchData"
+            >
+              Search
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -55,6 +71,7 @@ export default {
       characters: [],
       page: 1,
       pages: 1,
+      search: "",
     };
   },
   created() {
@@ -64,6 +81,7 @@ export default {
     fetch() {
       const params = {
         page: this.page,
+        name: this.search,
       };
 
       let result = axios
@@ -78,6 +96,10 @@ export default {
     },
     changePage(page) {
       this.page = page <= 0 || page > this.pages ? this.page : page;
+      this.fetch();
+    },
+    searchData() {
+      this.page = 1;
       this.fetch();
     },
   },
