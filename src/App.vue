@@ -120,7 +120,7 @@ export default {
       };
 
       let result = axios
-        .get(" https://rickandmortyapi.com/api/character", { params })
+        .get(" https://rickandmortyapi.com/api/character/", { params })
         .then((res) => {
           this.characters = res.data.results;
           this.pages = res.data.info.pages;
